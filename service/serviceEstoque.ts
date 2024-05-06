@@ -55,6 +55,9 @@ export class EstoqueService {
         return items.reduce((total, item) => total + item.quantity, 0); // calcula quantidade total de itens no inventário 
     }
 
-
+    async totalProductsQuantity(): Promise<number> {
+        const items: Item[] = await readCSV(this.filePath); // criando array de itens 
+        return items.length; 
+    }
 
 }

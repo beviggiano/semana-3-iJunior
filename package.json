@@ -11,5 +11,9 @@
     "url": "github.com/beviggiano/semana-3-iJunior"
   },
   "author": "Bernardo Viggiano",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0"
+  }
 }

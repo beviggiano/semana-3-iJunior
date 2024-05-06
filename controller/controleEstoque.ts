@@ -13,13 +13,13 @@ const input = prompt();
             console.log("1: Adicionar item");
             console.log("2: Remover item");
             console.log("3: Listar todos os itens");
-            //valor total
-            //peso total
+            //valor total OK
+            //peso total OK
             //média valor
             //média peso
             //quantidade total itens
             //quantidade total de produtos 
-            
+
 
             const action = input('Opção: ');
 

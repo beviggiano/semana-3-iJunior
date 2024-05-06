@@ -43,5 +43,11 @@ export class EstoqueService {
         return totalValue/totalItems;
     }
 
+    async averageWeight(): Promise<number>{
+        const items: Item[] = await readCSV(this.filePath); // criando array de itens 
+        let totalWeight: number = items.reduce((total, item) => total + (item.quantity * item.weigtht), 0); // calcula peso total de itens do invertário 
+        let totalItems: number = items.reduce((total, item) => total + item.quantity, 0); // calcula quantidade total de itens no inventário 
+        return totalWeight/totalItems;
+    }
 
 }

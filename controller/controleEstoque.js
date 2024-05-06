@@ -1,11 +1,8 @@
 import { EstoqueService } from "../service/serviceEstoque";
-import { Item } from "../model/types";
 import prompt from 'prompt-sync';
-
 const service = new EstoqueService();
 const input = prompt();
-
-function displayMenu(){
+function displayMenu() {
     console.log("\nEscolha uma das seguintes opções:");
     console.log("1: Adicionar item ao estoque");
     console.log("2: Remover item do estoque");

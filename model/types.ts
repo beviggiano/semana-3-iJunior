@@ -1,6 +1,6 @@
 export interface Item {
     name: string;
-    weigtht: number;
+    weight: number;
     value: number;
     quantity: number;
 }

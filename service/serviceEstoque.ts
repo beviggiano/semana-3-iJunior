@@ -33,7 +33,7 @@ export class EstoqueService {
 
     async totalWeight(): Promise<number>{
         const items: Item[] = await readCSV(this.filePath); // criando array de itens 
-        return items.reduce((total, item) => total + (item.quantity * item.weigtht), 0);
+        return items.reduce((total, item) => total + (item.quantity * item.weight), 0);
     }
 
     async averageValue(): Promise<number>{
@@ -45,7 +45,7 @@ export class EstoqueService {
 
     async averageWeight(): Promise<number>{
         const items: Item[] = await readCSV(this.filePath); // criando array de itens 
-        let totalWeight: number = items.reduce((total, item) => total + (item.quantity * item.weigtht), 0); // calcula peso total de itens do invertário 
+        let totalWeight: number = items.reduce((total, item) => total + (item.quantity * item.weight), 0); // calcula peso total de itens do invertário 
         let totalItems: number = items.reduce((total, item) => total + item.quantity, 0); // calcula quantidade total de itens no inventário 
         return totalItems > 0 ? totalWeight/totalItems : 0; //verificação para evitar divisão pro 0
     }

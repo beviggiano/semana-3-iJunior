@@ -18,3 +18,13 @@ function displayMenu(){
     console.log("9: Ver quantidade total de produtos no inventário");
     console.log("0: Sair");
 }
+
+async function addItem() {
+    const name = input('Digite o nome do item: ');
+    const weight = parseFloat(input('Digite o peso do item (kg): '));
+    const value = parseFloat(input('Digite o valor do item (R$): '));
+    const quantity = parseInt(input('Digite a quantidade do item: '), 10);
+    const item: Item = { name, weight, value, quantity };
+    await service.addItem(item);
+    console.log("Item adicionado com sucesso.");
+}

@@ -7,16 +7,25 @@ export class EstoqueService {
     filePath = path.join(__dirname, '../../data/estoque.csv');
 
     async addItem(item: Item): Promise<void> {
-        const items = await readCSV(this.filePath);
-        items.push(item);
-        await writeCSV(this.filePath, items);
-    }
+        const items = (await readCSV(this.filePath)).filter(i => i && i.name && i.weight && i.value && i.quantity); // Limpa itens inválidos
+        if (item.name && item.weight && item.value && item.quantity) {
+            items.push(item);
+            await writeCSV(this.filePath, items);
+        } else {
+            console.error("Erro ao adicionar item: Campos inválidos", item);
+        }
+    }        
 
     async removeItem(index: number): Promise<void> {
-        let items = await readCSV(this.filePath);
-        items = items.filter((_, i) => i !== index);
-        await writeCSV(this.filePath, items);
-      }
+        const items = await readCSV(this.filePath);  // Leia todos os itens
+        if (index >= 0 && index < items.length) {
+            items.splice(index, 1);  // Remove o item do array pelo índice
+            await writeCSV(this.filePath, items);  // Escreve o array atualizado de volta ao CSV
+            console.log(`Item no índice ${index} removido.`);
+        } else {
+            console.error("Índice fora dos limites, nenhuma remoção realizada.");
+        }
+    }    
 
     async listItems(): Promise<Item[]> {
         return readCSV(this.filePath);

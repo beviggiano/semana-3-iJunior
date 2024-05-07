@@ -11,8 +11,11 @@ const writeCSV = async (filePath, records) => {
             { id: 'value', title: 'Value' },
             { id: 'quantity', title: 'Quantity' }
         ],
-        append: false // false -> substituir o arquivo existente; true -> adicionar ao existente
+        append: true // Garanta que isso está configurado para true se quiser adicionar ao arquivo existente
     });
-    await csvWriter.writeRecords(records); // escreve os dados no arquivo CSV
+    console.log("Escrevendo para o CSV. Número de registros:", records.length);
+    await csvWriter.writeRecords(records)
+        .then(() => console.log("Escrita completa."))
+        .catch((error) => console.error("Erro ao escrever no CSV:", error));
 };
 exports.writeCSV = writeCSV;

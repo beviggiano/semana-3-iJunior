@@ -1,2 +1,6 @@
-Name,Weight,Value,Quantity
-pao,0,0,1000
+Name,Weight,Value,QuantityPERA,10,20,30
+ARROZ,1,10,100
+MAMAO,10,20,300
+PILHA,1,1,1
+OVOOO,1000,10000,100000
+MACARRAO,1,5,100

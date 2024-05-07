@@ -11,9 +11,18 @@ const readCSV = async (filePath) => {
     return new Promise((resolve, reject) => {
         (0, fs_1.createReadStream)(filePath)
             .pipe((0, csv_parser_1.default)())
-            .on('data', (data) => results.push(data))
-            .on('end', () => resolve(results))
-            .on('error', (error) => reject(error));
+            .on('data', (data) => {
+            console.log("Dado lido:", data); // Log cada item lido
+            results.push(data);
+        })
+            .on('end', () => {
+            console.log("Leitura completa. Total de itens lidos:", results.length);
+            resolve(results);
+        })
+            .on('error', (error) => {
+            console.error("Erro na leitura do CSV:", error);
+            reject(error);
+        });
     });
 };
 exports.readCSV = readCSV;

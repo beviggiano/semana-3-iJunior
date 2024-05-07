@@ -1,9 +1,10 @@
 import { Item } from '../model/types';
 import { readCSV } from '../model/readCSV';
 import { writeCSV } from '../model/writeCSV';
+import path from 'path'
 
 export class EstoqueService {
-    filePath = '../data/estoque.csv';
+    filePath = path.join(__dirname, '../../data/estoque.csv');
 
     async addItem(item: Item): Promise<void> {
         const items = await readCSV(this.filePath);

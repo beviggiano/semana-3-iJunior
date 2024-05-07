@@ -5,7 +5,7 @@ import prompt from 'prompt-sync';
 const service = new EstoqueService();
 const input = prompt();
 
-export function displayMenu(){
+function displayMenu(){
     console.log("\nEscolha uma das seguintes opções:");
     console.log("1: Adicionar item ao estoque");
     console.log("2: Remover item do estoque");
@@ -19,7 +19,7 @@ export function displayMenu(){
     console.log("0: Sair");
 }
 
-export async function addItem() {
+async function addItem() {
     const name = input('Digite o nome do item: ');
     const weight = parseFloat(input('Digite o peso do item (kg): '));
     const value = parseFloat(input('Digite o valor do item (R$): '));
@@ -29,44 +29,89 @@ export async function addItem() {
     console.log("Item adicionado com sucesso.");
 }
 
-export async function removeItem() {
+async function removeItem() {
     const index = parseInt(input('Digite o índice do item a ser removido: '), 10);
     await service.removeItem(index);
     console.log("Item removido com sucesso!");
 }
 
-export async function listItems(){
+async function listItems(){
     const items = await service.listItems();
     console.log("Itens no estoque: ");
     items.forEach((item, index) => console.log(`${index}: ${item.name}, Peso: ${item.weight} kg, Valor: ${item.value} R$, Quantidade: ${item.quantity}`));
 }
 
-export async function showTotalValue(){
+async function showTotalValue(){
     const total = await service.totalValue();
     console.log(`Valor total do inventário: R$ ${total.toFixed(2)}`);
 }
 
-export async function showTotalWeight(){
+async function showTotalWeight(){
     const total = await service.totalWeight();
     console.log(`Peso total do inverário: ${total.toFixed(2)} kg`)
 }
 
-export async function showAverageValue(){
+async function showAverageValue(){
     const average = await service.averageValue();
     console.log(`A média de valor dos itens do inventário é de: ${average.toFixed(2)}`);
 }
 
-export async function showAverageWeight(){
+async function showAverageWeight(){
     const average = await service.averageWeight();
     console.log(`A média de peso dos itens do invertário é de: ${average.toFixed(2)}`);
 }
 
-export async function showTotalItemsQuantity(){
+async function showTotalItemsQuantity(){
     const total = await service.totalItemsQuantity();
     console.log(`A quantidade total de itens no invertário é de: ${total}`);
 }
 
-export async function showTotalProductsQuantity(){
+async function showTotalProductsQuantity(){
     const total = await service.totalProductsQuantity();
     console.log(`A quantidade total de produtos no invertário é de: ${total}`);
+}
+
+export async function program() {
+    const input = prompt();
+    let running = true;
+    while (running) {
+        displayMenu();
+        let choice = input("Digite sua opção: ");
+
+        switch (choice) {
+            case '1':
+                await addItem();
+                break;
+            case '2':
+                await removeItem();
+                break;
+            case '3':
+                await listItems();
+                break;
+            case '4':
+                await showTotalValue();
+                break;
+            case '5':
+                await showTotalWeight();
+                break;
+            case '6':
+                await showAverageValue();
+                break;
+            case '7':
+                await showAverageWeight();
+                break;
+            case '8':
+                await showTotalItemsQuantity();
+                break;
+            case '9':
+                await showTotalProductsQuantity();
+                break;
+            case '0':
+                console.log("Saindo...");
+                running = false;
+                break;
+            default:
+                console.log("Opção inválida. Por favor, tente novamente.");
+        }
+    }
 }

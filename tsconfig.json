@@ -1,6 +1,16 @@
 {
     "compilerOptions": {
-        "moduleResolution": "node",
-        "target": "ESNext"
-    }
+        "module": "commonjs",
+        "target": "ESNext",
+        "outDir": "./dist",
+        "strict": true,
+        "esModuleInterop": true
+
+    },
+    "include": [
+        "index.ts",
+        "controller/*.ts",
+        "model/*.ts",
+        "service/*.ts"
+    ]
 }

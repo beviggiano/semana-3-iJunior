@@ -50,3 +50,8 @@ export async function showTotalWeight(){
     const total = await service.totalWeight();
     console.log(`Peso total do inverário: ${total.toFixed(2)} kg`)
 }
+
+export async function showAvaregeValue(){
+    const avarege = await service.averageValue();
+    console.log(`A média de valor dos itens do inventário é de ${avarege.toFixed(2)}`);
+}

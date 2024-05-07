@@ -45,3 +45,8 @@ export async function showTotalValue(){
     const total = await service.totalValue();
     console.log(`Valor total do inventário: R$ ${total.toFixed(2)}`);
 }
+
+export async function showTotalWeight(){
+    const total = await service.totalWeight();
+    console.log(`Peso total do inverário: ${total.toFixed(2)} kg`)
+}

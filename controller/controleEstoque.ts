@@ -28,3 +28,9 @@ async function addItem() {
     await service.addItem(item);
     console.log("Item adicionado com sucesso.");
 }
+
+async function removeItem() {
+    const index = parseInt(input('Digite o índice do item a ser removido: '), 10);
+    await service.removeItem(index);
+    console.log("Item removido com sucesso!");
+}

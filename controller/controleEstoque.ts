@@ -40,3 +40,8 @@ export async function listItems(){
     console.log("Itens no estoque: ");
     items.forEach((item, index) => console.log(`${index}: ${item.name}, Peso: ${item.weight} kg, Valor: ${item.value} R$, Quantidade: ${item.quantity}`));
 }
+
+export async function showTotalValue(){
+    const total = await service.totalValue();
+    console.log(`Valor total do inventário: R$ ${total.toFixed(2)}`);
+}

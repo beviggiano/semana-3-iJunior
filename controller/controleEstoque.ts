@@ -60,3 +60,9 @@ export async function showAverageWeight(){
     const average = await service.averageWeight();
     console.log(`A média de peso dos itens do invertário é de ${average.toFixed(2)}`);
 }
+
+export async function showTotalItemsQuantity(){
+    const total = await service.totalItemsQuantity();
+    console.log(`A quantidade total de itens no invertário é de ${total}`);
+}
+

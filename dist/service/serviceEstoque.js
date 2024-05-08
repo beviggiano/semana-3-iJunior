@@ -42,7 +42,9 @@ class EstoqueService {
     }
     async listItems() {
         try {
-            return await (0, readCSV_1.readCSV)(this.filePath);
+            const items = await (0, readCSV_1.readCSV)(this.filePath);
+            console.log("Itens lidos:", items); // Verifique se os itens estão sendo lidos corretamente
+            return items;
         }
         catch (error) {
             console.error("Erro ao listar itens:", error);

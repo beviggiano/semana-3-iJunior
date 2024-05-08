@@ -37,7 +37,9 @@ export class EstoqueService {
 
     async listItems(): Promise<Item[]> {
         try {
-            return await readCSV(this.filePath);
+            const items: Item[] = await readCSV(this.filePath);
+            console.log("Itens lidos:", items); // Verifique se os itens estão sendo lidos corretamente
+            return items;
         } catch (error) {
             console.error("Erro ao listar itens:", error);
             return [];

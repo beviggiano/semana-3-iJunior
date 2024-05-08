@@ -20,7 +20,6 @@ const readCSV = async (filePath) => {
                     });
                 }
             }
-            console.log("Leitura completa. Total de itens lidos:", results.length);
             resolve(results);
         })
             .catch((error) => {

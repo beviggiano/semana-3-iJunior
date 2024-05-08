@@ -11,10 +11,15 @@ class EstoqueService {
     filePath = path_1.default.join(__dirname, '../../data/estoque.csv');
     async addItem(item) {
         try {
-            const items = (await (0, readCSV_1.readCSV)(this.filePath)).filter(i => i && i.name && i.weight && i.value && i.quantity); // Limpa itens inválidos
+            // Leia todos os itens do arquivo CSV
+            const items = await (0, readCSV_1.readCSV)(this.filePath);
+            // Verifique se o novo item tem todos os campos necessários
             if (item.name && item.weight && item.value && item.quantity) {
+                // Adicione o novo item ao final da lista de itens existentes
                 items.push(item);
+                // Escreva a lista atualizada de itens de volta ao arquivo CSV
                 await (0, writeCSV_1.writeCSV)(this.filePath, items);
+                console.log("Item adicionado com sucesso:", item);
             }
             else {
                 throw new Error("Campos inválidos ao adicionar item");
@@ -22,28 +27,36 @@ class EstoqueService {
         }
         catch (error) {
             console.error("Erro ao adicionar item:", error);
+            throw error;
         }
     }
     async removeItem(index) {
         try {
-            const items = await (0, readCSV_1.readCSV)(this.filePath); // Leia todos os itens
+            console.log("Iniciando remoção do item no índice:", index);
+            // Leia todos os itens do arquivo CSV
+            const items = await (0, readCSV_1.readCSV)(this.filePath);
+            console.log("Itens atuais no estoque:", items);
+            // Verifique se o índice está dentro dos limites
             if (index >= 0 && index < items.length) {
-                items.splice(index, 1); // Remove o item do array pelo índice
-                await (0, writeCSV_1.writeCSV)(this.filePath, items); // Escreve o array atualizado de volta ao CSV
-                console.log(`Item no índice ${index} removido.`);
+                // Remova o item do array pelo índice
+                const removedItem = items.splice(index, 1)[0];
+                console.log("Item removido:", removedItem);
+                // Escreva o array atualizado de volta ao CSV
+                await (0, writeCSV_1.writeCSV)(this.filePath, items);
+                console.log("Lista de itens atualizada com sucesso.");
             }
             else {
-                throw new Error("Índice fora dos limites, nenhuma remoção realizada.");
+                console.error("Índice fora dos limites, nenhuma remoção realizada.");
             }
         }
         catch (error) {
             console.error("Erro ao remover item:", error);
+            throw error;
         }
     }
     async listItems() {
         try {
             const items = await (0, readCSV_1.readCSV)(this.filePath);
-            console.log("Itens lidos:", items); // Verifique se os itens estão sendo lidos corretamente
             return items;
         }
         catch (error) {

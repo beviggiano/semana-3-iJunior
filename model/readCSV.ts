@@ -20,7 +20,6 @@ export const readCSV = async (filePath: string): Promise<Item[]> => {
             });
           }
         }
-        console.log("Leitura completa. Total de itens lidos:", results.length);
         resolve(results);
       })
       .catch((error) => {

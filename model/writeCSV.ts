@@ -3,28 +3,21 @@ import { Item } from './types';
 
 export const writeCSV = async (filePath: string, items: Item[]): Promise<void> => {
   try {
-    console.log("Iniciando escrita no arquivo CSV...");
+    console.log("Iniciando reescrita do arquivo CSV...");
 
-    // Gere a string CSV para o novo item
-    const newItemCsv = `${items[items.length - 1].name},${items[items.length - 1].weight},${items[items.length - 1].value},${items[items.length - 1].quantity}`;
+    // Preparar o cabeçalho e os dados em formato CSV
+    const header = 'Name,Weight,Value,Quantity';
+    const data = items.map(item => `${item.name},${item.weight},${item.value},${item.quantity}`).join('\n');
+
+    // Combina o cabeçalho com os dados
+    const csvContent = `${header}\n${data}`;
+
+    // Escreve todo o conteúdo de uma vez, substituindo o arquivo existente
+    await fsPromises.writeFile(filePath, csvContent, 'utf8');
     
-    // Verifique se o arquivo CSV já contém itens
-    const fileExists = await fsPromises.access(filePath)
-      .then(() => true)
-      .catch(() => false);
-
-    // Se o arquivo existir e já contiver itens, apenas adicione o novo item
-    if (fileExists) {
-      await fsPromises.appendFile(filePath, '\n' + newItemCsv);
-    } else {
-      // Caso contrário, adicione o cabeçalho junto com o novo item
-      const header = 'Name,Weight,Value,Quantity';
-      await fsPromises.writeFile(filePath, header + '\n' + newItemCsv);
-    }
-
-    console.log("Escrita concluída.");
+    console.log("Arquivo CSV atualizado com sucesso.");
   } catch (error) {
-    console.error("Erro na escrita do CSV:", error);
+    console.error("Erro na reescrita do CSV:", error);
     throw error;
   }
 };

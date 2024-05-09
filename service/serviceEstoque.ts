@@ -33,17 +33,19 @@ export class EstoqueService {
         try {
             console.log("Iniciando remoção do item no índice:", index);
 
-            // Leia todos os itens do arquivo CSV
+            //Lendo todos os itens do arquivo CSV
             const items = await readCSV(this.filePath);
             console.log("Itens atuais no estoque:", items);
 
-            // Verifique se o índice está dentro dos limites
+            //Verificando se o índice está dentro dos limites
             if (index >= 0 && index < items.length) {
-                // Remova o item do array pelo índice
+                //Removendo o item do array pelo índice
                 const removedItem = items.splice(index, 1)[0];
                 console.log("Item removido:", removedItem);
 
-                // Escreva o array atualizado de volta ao CSV
+                console.log("Itens após a remoção:", items);
+
+                //Escrevendo o array atualizado de volta ao CSV
                 await writeCSV(this.filePath, items);
                 console.log("Lista de itens atualizada com sucesso.");
             } else {

@@ -77,7 +77,7 @@ export async function program() {
     while (running) {
         displayMenu();
         let choice = input("Digite sua opção: ");
-
+        console.log(" ");
         switch (choice) {
             case '1':
                 await addItem();
